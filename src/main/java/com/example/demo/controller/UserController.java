@@ -23,12 +23,12 @@ public class UserController {
 	public ResponseEntity<?> create(@RequestBody final User user){
 		User newUser=new User();
 		newUser.setUserName(user.getUserName());
-		newUser.setPassword(newUser.getUserName());
+		newUser.setPassword(user.getPassword());
 		userRepo.saveAndFlush(newUser);
 		return ResponseEntity.status(HttpStatus.OK).body(newUser);	
 	}
 	@PostMapping("/login")
-	public ResponseEntity<?> archive(@PathVariable final User user){
+	public ResponseEntity<?> archive(@RequestBody final User user){
 		User isUser=userRepo.checkUser(user.getUserName(),user.getPassword());
 		if(isUser!=null) {
 			return ResponseEntity
